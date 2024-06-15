@@ -1,0 +1,45 @@
+{% extends "menu.html" %}
+
+{% load static %}
+
+{% block head %}
+{% endblock head %}
+
+
+
+{% block main_content %}
+
+
+
+<h2>Edit Role for {{ user.username }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save changes</button>
+    </form>
+    <a href="{% url 'list_users' %}">Back to user list</a>
+
+
+
+
+{% endblock main_content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

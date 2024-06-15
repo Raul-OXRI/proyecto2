@@ -1,0 +1,14 @@
+html{
+    overflow-x: hidden;
+    margin: calc(-1 * (100vw - 100%));
+}
+
+.layout{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.layout main {
+    flex-grow: 1;
+}

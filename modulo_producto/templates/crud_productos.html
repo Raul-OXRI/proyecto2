@@ -1,0 +1,100 @@
+{% extends "menu.html" %}
+
+{% load static %}
+
+{% block head %}
+{% endblock head %}
+
+
+
+{% block main_content %}
+
+<section>
+    <div class="container m-4" style="display: flex; justify-content:flex-end">
+        <div class="row">
+            <div class="col-md-12">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    Agregar Productos <i class="bi bi-clipboard-plus-fill"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container m-4">
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">cod producto</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Descripción</th>
+                        <th scope="col">Precio</th>
+                        <th scope="col">Cantidad</th>
+                        <th scope="col">Fecha Creación</th>
+                        <th scope="col">Acciones</th> <!-- Added for action buttons -->
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                    <tr>
+                        <td>{{ producto.producto_id }}</td>
+                        <td>{{ producto.nombre_producto }}</td>
+                        <td>{{ producto.descripcion_producto }}</td>
+                        <td>{{ producto.precio_producto }}</td>
+                        <td>{{ producto.stock_producto }}</td>
+                        <td>{{ producto.fecha_creacion_producto }}</td>
+                        <td>
+                            <form method="post" action="{% url 'downproducto' producto.producto_id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<section>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Agregar Producto</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        {% if form.errors %}
+                            <div class="alert alert-danger">
+                                <ul>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <li>{{ error }}</li>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <li>{{ error }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        {% endif %}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock main_content %}

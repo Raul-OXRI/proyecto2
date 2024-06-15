@@ -1,0 +1,44 @@
+{% extends "menu.html" %}
+
+{% load static %}
+
+{% block head %}
+{% endblock head %}
+
+
+
+{% block main_content %}
+
+<h2>List users</h2>
+    
+
+
+
+{% for user in users %}
+    <p>{{ user.username }}</p>
+    <li><a href="{% url 'edit' user.id %}">editar</a></li>
+{% endfor %}
+
+
+
+{% endblock main_content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

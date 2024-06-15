@@ -1,0 +1,42 @@
+{% extends "menu.html" %}
+
+{% load static %}
+
+{% block head %}
+{% endblock head %}
+
+
+
+{% block main_content %}
+
+<h1>PRODUCTOS</h1>
+
+<div class="row">
+    {% for producto in productos %}
+        <div class="col-md-3 mb-4">
+            <div class="card">
+                <img src="{{ producto.imagen_producto.url }}" class="card-img-top img-fluid fixed-size" alt="{{ producto.nombre_producto }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ producto.nombre_producto }}</h5>
+                    <p class="card-text">Precio: Q{{ producto.precio_producto }}</p>
+                    <a href="#" class="btn btn-primary">Agregar al carrito</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+<style>
+    .fixed-size {
+        width: 100%; /* Ensure the image takes the full width of the card */
+        height: 200px; /* Set a fixed height for the images */
+        object-fit: cover; /* Ensure the images cover the entire area without stretching */
+    }
+</style>
+
+
+
+
+
+
+{% endblock main_content %}
